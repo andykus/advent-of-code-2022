@@ -1,0 +1,1 @@
+export const desc = (a, b) => b - a;
