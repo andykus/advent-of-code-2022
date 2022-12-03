@@ -11,14 +11,11 @@ const getItemValue = (item) => {
 
 const organizeRucksack = (rucksack) => {
     const items = rucksack.split('');
-    const firstCompartment = items.slice(0, items.length / 2);
-    const secondCompartment = items.slice(items.length / 2);
 
     return {
-        inventory: items,
-        firstCompartment, 
-        secondCompartment,
-        commonItemType: intersect(firstCompartment, secondCompartment)[0]
+        items,
+        firstCompartment: items.slice(0, items.length / 2), 
+        secondCompartment: items.slice(items.length / 2),
     };
 };
 
@@ -30,19 +27,18 @@ const parseRucksacks = async () => {
 
 const solvePartOne = (rucksacks) => {
     return rucksacks
-        .map(r => r.commonItemType)
+        .map(r => intersect(r.firstCompartment, r.secondCompartment)[0])
         .map(getItemValue)
         .reduce(sum);
 };
 
 const solvePartTwo = (rucksacks) => {
     const groups = chunk(rucksacks, 3);
-    const inventories = groups.map(gr => gr.map(e => e.inventory));
+    const inventories = groups.map(gr => gr.map(e => e.items));
     const badges = inventories.map(i => intersect(...i)[0]);
     return badges.map(getItemValue).reduce(sum);
 };
 
 const rucksacks = await parseRucksacks();
-
 console.log(`Part one: ${solvePartOne(rucksacks)}`);
 console.log(`Part two: ${solvePartTwo(rucksacks)}`);
