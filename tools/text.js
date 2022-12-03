@@ -10,3 +10,14 @@ export const christmasPrint = (text) => {
 
     console.log(colorfulTokens.join(''));
 };
+
+export const alphabetToNumeric = () => {
+    const values = {};
+
+    for (let i = 1; i <= 26; i++) {
+        values[String.fromCharCode(i + 64).toLowerCase()] = i;
+        values[String.fromCharCode(i + 64)] = i + 26;
+    }
+
+    return values;
+};
