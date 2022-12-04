@@ -2,7 +2,7 @@ import { promises as fs } from 'fs';
 import { intersect } from '../tools/arrays.js';
 
 const rangeToIndeces = (range) => {
-    let [ low, high ] = range.split('-').map(Number);
+    const [ low, high ] = range.split('-').map(Number);
     return [...Array((high - low) + 1).keys()].map(i => low + i);
 };
 
