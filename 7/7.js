@@ -3,10 +3,6 @@ import { sum } from '../tools/mafs.js';
 
 const data = await fs.readFile('./input', 'utf-8');
 
-const getTotalFileSizes = () => {
-    return [...data.matchAll(/\d+/g)].map(s => Number(s[0])).reduce(sum, 0);
-};
-
 const getSubFoldersSize = (path, fileSystem) => {
     return fileSystem
         .filter(s => s.path.startsWith(path) && s.path !== path)
@@ -50,15 +46,9 @@ const parseFileSystem = () => {
 
     return fileSystem.map(f => {
         f.size = f.size += getSubFoldersSize(f.path, fileSystem);
-
-        if (f.path === '/') {
-            f.size = getTotalFileSizes();
-        }
-
         return f;
     });
 };
-
 
 const solvePartOne = (fileSystem) => {
     return fileSystem
