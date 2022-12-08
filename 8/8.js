@@ -21,10 +21,10 @@ const viewDistance = (tree, otherTrees) => {
 };
 
 const calculateScenicScore = (x, y, grid) => {
-    const tree = treeGrid[y][x];
+    const tree = grid[y][x];
     const column = getColumn(x, grid);
-    const leftScore = viewDistance(tree, treeGrid[y].slice(0, x).reverse());
-    const rightScore = viewDistance(tree, treeGrid[y].slice(x+1));
+    const leftScore = viewDistance(tree, grid[y].slice(0, x).reverse());
+    const rightScore = viewDistance(tree, grid[y].slice(x+1));
     const topScore = viewDistance(tree, column.slice(0, y).reverse());
     const downScore = viewDistance(tree, column.slice(y+1));
     return leftScore * rightScore * topScore * downScore;
@@ -40,12 +40,12 @@ const isVisibleFromEdge = (x, y, grid) => {
     return tree > topLeft || tree > topRight || tree > topUp || tree > topDown;
 };
 
-const solvePartOne = (treeGrid) => {
-    let totalTrees = (treeGrid.length * 4) - 4;
+const solvePartOne = (grid) => {
+    let totalTrees = (grid.length * 4) - 4;
 
-    for (let y = 1; y < treeGrid.length - 1; y++) {
-        for (let x = 1; x < treeGrid[y].length - 1; x++) {
-            if (isVisibleFromEdge(x, y, treeGrid)) {
+    for (let y = 1; y < grid.length - 1; y++) {
+        for (let x = 1; x < grid[y].length - 1; x++) {
+            if (isVisibleFromEdge(x, y, grid)) {
                 totalTrees++;
             }
         }
@@ -54,12 +54,12 @@ const solvePartOne = (treeGrid) => {
     return totalTrees;
 };
 
-const solvePartTwo = (treeGrid) => {
+const solvePartTwo = (grid) => {
     const scenicScores = [];
 
-    for (let y = 1; y < treeGrid.length - 1; y++) {
-        for (let x = 1; x < treeGrid[y].length - 1; x++) {
-            scenicScores.push(calculateScenicScore(x, y, treeGrid));
+    for (let y = 1; y < grid.length - 1; y++) {
+        for (let x = 1; x < grid[y].length - 1; x++) {
+            scenicScores.push(calculateScenicScore(x, y, grid));
         }
     }
 
