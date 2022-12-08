@@ -31,8 +31,8 @@ const calculateScenicScore = (x, y, grid) => {
 };
 
 const isVisibleFromEdge = (x, y, grid) => {
-    const column = getColumn(x, grid);
     const tree = grid[y][x];
+    const column = getColumn(x, grid);
     const topLeft = Math.max(...grid[y].slice(0, x));
     const topRight = Math.max(...grid[y].slice(x+1));
     const topUp = Math.max(...column.slice(0, y));
