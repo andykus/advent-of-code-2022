@@ -26,7 +26,7 @@ const calculateScenicScore = (x, y, grid) => {
     const leftScore = viewDistance(tree, treeGrid[y].slice(0, x).reverse());
     const rightScore = viewDistance(tree, treeGrid[y].slice(x+1));
     const topScore = viewDistance(tree, column.slice(0, y).reverse());
-    const downScore = viewDistance(tree, column.slice(y+1, column.length));
+    const downScore = viewDistance(tree, column.slice(y+1));
     return leftScore * rightScore * topScore * downScore;
 };
 
