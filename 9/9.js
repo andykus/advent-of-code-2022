@@ -53,7 +53,6 @@ const findVisitedTailPositions = (motions, ropeLength) => {
         'U': ({x, y}) => ({x, y: y + 1}),
     };
 
-
     motions.forEach(({ len, dir }) => {
         for (let j = 0; j < len; j++) {
             rope[0] = headMoves[dir](rope[0]);
